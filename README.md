@@ -1,27 +1,149 @@
-# AngularGanttScheduleTimelineCalendar
+<p align="center">
+  <img src="https://neuronet.io/screenshots/gstc9-flat-bgw-300.png" alt="logo">
+</p>
+<hr />
+<h1 align="center">angular-gantt-schedule-timeline-calendar</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
+Angular version of [gantt-schedule-timeline-calendar](https://github.com/neuronetio/gantt-schedule-timeline-calendar)
 
-## Development server
+Documentation can be found on original component page at [gantt-schedule-timeline-calendar](https://github.com/neuronetio/gantt-schedule-timeline-calendar)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<p align="center">
+  <img src="https://neuronet.io/screenshots/appscrn.png?uniq=1" alt="gstc-logo">
+</p>
 
-## Code scaffolding
+## installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`npm i angular-gantt-schedule-timeline-calendar`
 
-## Build
+## usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+app.module
 
-## Running unit tests
+```javascript
+/*...*/
+import { GSTCComponent } from "angular-gantt-schedule-timeline-calendar";
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  declarations: [/*...*/ GSTCComponent, /*...*/],
+  /*...*/
+})
+/*...*/
+```
 
-## Running end-to-end tests
+component
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```javascript
+import { Component, OnInit } from "@angular/core";
 
-## Further help
+@Component({
+  selector: "your-selector",
+  template: '<gstc [config]="config" [onState]="onState"></gstc>'
+})
+export class YourComponent implements OnInit {
+  title = "ng-gstc-test";
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  config: any;
+  gstcState: any;
+
+  ngOnInit() {
+    const iterations = 400;
+
+    // GENERATE SOME ROWS
+
+    const rows = {};
+    for (let i = 0; i < iterations; i++) {
+      const withParent = i > 0 && i % 2 === 0;
+      const id = i.toString();
+      rows[id] = {
+        id,
+        label: "Room " + i,
+        parentId: withParent ? (i - 1).toString() : undefined,
+        expanded: false
+      };
+    }
+
+    const dayLen = 24 * 60 * 60 * 1000;
+
+    // GENERATE SOME ROW -> ITEMS
+
+    const items = {};
+    for (let i = 0; i < iterations; i++) {
+      const id = i.toString();
+      const start = new Date().getTime();
+      items[id] = {
+        id,
+        label: "User id " + i,
+        time: {
+          start: start + i * dayLen,
+          end: start + (i + 2) * dayLen
+        },
+        rowId: id
+      };
+    }
+
+    // LEFT SIDE LIST COLUMNS
+
+    const columns = {
+      percent: 100,
+      resizer: {
+        inRealTime: true
+      },
+      data: {
+        label: {
+          id: "label",
+          data: "label",
+          expander: true,
+          isHtml: true,
+          width: 230,
+          minWidth: 100,
+          header: {
+            content: "Room"
+          }
+        }
+      }
+    };
+
+    this.config = {
+      height: 800,
+      list: {
+        rows,
+        columns
+      },
+      chart: {
+        items
+      }
+    };
+  }
+
+  // GET THE GANTT INTERNAL STATE
+
+  onState(state) {
+    this.gstcState = state;
+
+    // YOU CAN SUBSCRIBE TO CHANGES
+
+    this.gstcState.subscribe("config.list.rows", rows => {
+      console.log("rows changed", rows);
+    });
+
+    this.gstcState.subscribe(
+      "config.chart.items.:id",
+      (bulk, eventInfo) => {
+        if (eventInfo.type === "update" && eventInfo.params.id) {
+          const itemId = eventInfo.params.id;
+          console.log(
+            `item ${itemId} changed`,
+            this.gstcState.get("config.chart.items." + itemId)
+          );
+        }
+      },
+      { bulk: true }
+    );
+  }
+}
+```
+
+## license
+
+GPL-3.0 (for non GPL-3.0 projects you must buy commercial license - contact me at neuronet.io@gmail.com)
