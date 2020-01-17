@@ -3,5 +3,6 @@
   "dest": "../../dist/angular-gantt-schedule-timeline-calendar",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["gantt-schedule-timeline-calendar"]
 }

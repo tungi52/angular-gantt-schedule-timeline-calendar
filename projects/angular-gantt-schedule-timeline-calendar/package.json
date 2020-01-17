@@ -1,8 +1,24 @@
 {
   "name": "angular-gantt-schedule-timeline-calendar",
-  "version": "0.1.0",
+  "version": "1.0.8",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
-  }
+  },
+  "dependencies": {
+    "gantt-schedule-timeline-calendar": "^1.0.25"
+  },
+  "description": "Angular version of gantt-schedule-timeline-calendar",
+  "keywords": [
+    "angular gantt",
+    "gantt",
+    "schedule",
+    "timeline",
+    "calendar",
+    "gantt chart",
+    "angular schedule",
+    "angular scheduler",
+    "angular timeline",
+    "angular calendar"
+  ]
 }

@@ -22,11 +22,12 @@ import GSTC from "gantt-schedule-timeline-calendar/dist/index.esm.js";
 export class GSTCComponent implements AfterViewInit, OnDestroy {
   @Input() config: any;
   @Input() onState: (state) => void;
+  @ViewChild("gstcElement", { static: true }) gstcElement: ElementRef;
 
   GSTC: any;
   state: any;
-  @ViewChild("gstcElement", { static: true })
-  gstcElement: ElementRef;
+
+  constructor() {}
 
   ngAfterViewInit() {
     const element = this.gstcElement.nativeElement;
