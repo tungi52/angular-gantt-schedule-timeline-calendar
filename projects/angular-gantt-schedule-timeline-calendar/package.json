@@ -8,8 +8,8 @@
   "dependencies": {
     "gantt-schedule-timeline-calendar": "^1.0.25"
   },
-  "license": "GPL-3.0",
-  "description": "Angular version of gantt-schedule-timeline-calendar",
+  "license": "AAGPL-3.0",
+  "description": "Angular version of gantt-schedule-timeline-calendar [ angular gantt, angular schedule, angular timeline, angular calendar, angular schedule timeline, angular gantt schedule ]",
   "keywords": [
     "angular gantt",
     "gantt",
