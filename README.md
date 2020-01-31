@@ -18,6 +18,8 @@ Documentation can be found on original component page at [gantt-schedule-timelin
 
 ## usage
 
+example app can be found here [ng-gantt-schedule-timeline-calendar](https://github.com/neuronetio/ng-gantt-schedule-timeline-calendar)
+
 app.module
 
 ```javascript
