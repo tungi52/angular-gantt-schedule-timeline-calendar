@@ -2,6 +2,20 @@
   "name": "angular-gantt-schedule-timeline-calendar",
   "version": "1.0.19",
   "license": "AGPL-3.0",
+  "description": "Angular version of gantt-schedule-timeline-calendar [ angular gantt, angular schedule, angular timeline, angular calendar, angular schedule timeline, angular gantt schedule, agngular booking ]",
+  "keywords": [
+    "angular gantt",
+    "gantt",
+    "schedule",
+    "timeline",
+    "calendar",
+    "gantt chart",
+    "angular schedule",
+    "angular scheduler",
+    "angular timeline",
+    "angular calendar",
+    "angular booking"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
