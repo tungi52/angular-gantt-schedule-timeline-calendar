@@ -4,8 +4,10 @@ import {
   ElementRef,
   ViewChild,
   Input,
+  Output,
   OnDestroy,
-  ViewEncapsulation
+  ViewEncapsulation,
+  EventEmitter
 } from "@angular/core";
 import GSTC from "gantt-schedule-timeline-calendar/dist/index.esm.js";
 
@@ -21,7 +23,7 @@ import GSTC from "gantt-schedule-timeline-calendar/dist/index.esm.js";
 })
 export class GSTCComponent implements AfterViewInit, OnDestroy {
   @Input() config: any;
-  @Input() onState: (state) => void;
+  @Output() onState: EventEmitter<any> = new EventEmitter();
   @ViewChild("gstcElement", { static: true }) gstcElement: ElementRef;
 
   GSTC: any;
@@ -32,7 +34,7 @@ export class GSTCComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     const element = this.gstcElement.nativeElement;
     this.state = GSTC.api.stateFromConfig(this.config);
-    this.onState(this.state);
+    this.onState.emit(this.state);
     this.GSTC = GSTC({
       element,
       state: this.state

@@ -40,7 +40,7 @@ import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "your-selector",
-  template: '<gstc [config]="config" [onState]="onState.bind(this)"></gstc>'
+  template: '<gstc [config]="config" (onState)="onState($event)"></gstc>'
 })
 export class YourComponent implements OnInit {
   title = "ng-gstc-test";
